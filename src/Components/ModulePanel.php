@@ -5,11 +5,14 @@ namespace Seiger\sLMS\Components;
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Schema;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Seiger\sLMS\Models\Course;
 use Seiger\sLMS\Models\Lesson;
 use Seiger\sLMS\Models\Module;
 use Seiger\sLMS\Support\ManagerAccess;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Switch between the course manager and the current catalogue overview.
@@ -22,6 +25,12 @@ class ModulePanel extends Component
 
     public string $activeTab = self::DEFAULT_TAB;
 
+    #[Locked]
+    public ?int $courseId = null;
+
+    #[Locked]
+    public ?int $moduleId = null;
+
     /**
      * Keep the selected tab within the two sections offered by sLMS.
      *
@@ -32,10 +41,62 @@ class ModulePanel extends Component
         if (!in_array($this->activeTab, ['courses', 'overview'], true)) {
             $this->activeTab = self::DEFAULT_TAB;
         }
+
+        if ($this->activeTab === self::DEFAULT_TAB) {
+            $this->courseId = $this->moduleId = null;
+        }
     }
 
     /**
-     * Render the active manager tab and query overview counts only when visible.
+     * Open the module list for a course selected in the course table.
+     *
+     * @since 0.1.0
+     */
+    #[On('slms-open-course')]
+    public function openCourse(int $id): void
+    {
+        ManagerAccess::authorize();
+        if ($this->activeTab !== 'courses' || $this->courseId !== null) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->courseId = (int) Course::query()->findOrFail($id)->getKey();
+    }
+
+    /**
+     * Open the lesson list for a module in the current course.
+     *
+     * @since 0.1.0
+     */
+    #[On('slms-open-module')]
+    public function openModule(int $id): void
+    {
+        ManagerAccess::authorize();
+        if ($this->activeTab !== 'courses' || $this->courseId === null || $this->moduleId !== null) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->moduleId = (int) Module::query()->where('course_id', $this->courseId)->findOrFail($id)->getKey();
+    }
+
+    /**
+     * Return to the modules of the current course or to the course catalogue.
+     *
+     * @since 0.1.0
+     */
+    public function backToParent(): void
+    {
+        ManagerAccess::authorize();
+
+        if ($this->moduleId !== null) {
+            $this->moduleId = null;
+        } else {
+            $this->courseId = null;
+        }
+    }
+
+    /**
+     * Render the active manager tab and load the current catalogue level.
      *
      * @since 0.1.0
      */
@@ -45,7 +106,11 @@ class ModulePanel extends Component
 
         $isOverview = $this->activeTab === 'overview';
         $schemaReady = Schema::hasTable((new Course())->getTable())
-            && (!$isOverview || (Schema::hasTable((new Module())->getTable()) && Schema::hasTable((new Lesson())->getTable())));
+            && (!$isOverview && $this->courseId === null
+                || (Schema::hasTable((new Module())->getTable()) && Schema::hasTable((new Lesson())->getTable())));
+
+        $course = $schemaReady && $this->courseId !== null ? Course::query()->findOrFail($this->courseId) : null;
+        $module = $course !== null && $this->moduleId !== null ? $course->modules()->findOrFail($this->moduleId) : null;
 
         return view('sLMS::livewire.module-panel', [
             'tabs' => [
@@ -54,6 +119,8 @@ class ModulePanel extends Component
             ],
             'schemaReady' => $schemaReady,
             'overview' => $schemaReady && $isOverview ? $this->overview() : null,
+            'course' => $course,
+            'module' => $module,
         ]);
     }
 

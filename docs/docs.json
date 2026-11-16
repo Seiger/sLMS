@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "package": "seiger/slms",
+  "title": "sLMS",
+  "canonicalLocale": "uk",
+  "visibility": "public",
+  "generated": false,
+  "legacy": false,
+  "audience": [
+    "manager-users",
+    "developers",
+    "integrators"
+  ],
+  "status": "partial",
+  "locales": {
+    "uk": "partial",
+    "en": "partial",
+    "de": "partial",
+    "fr": "partial",
+    "pl": "partial",
+    "ru": "partial"
+  },
+  "entrypoints": {
+    "overview": {
+      "type": "explanation",
+      "path": "uk/README.md",
+      "status": "partial"
+    },
+    "user": {
+      "type": "how-to",
+      "path": "uk/user-guide.md",
+      "status": "partial"
+    },
+    "developer": {
+      "type": "explanation",
+      "path": "uk/developer-guide.md",
+      "status": "partial"
+    },
+    "reference": {
+      "type": "reference",
+      "path": "uk/reference.md",
+      "status": "partial"
+    }
+  }
+}

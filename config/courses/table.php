@@ -61,6 +61,14 @@ return [
     ],
     'row_actions' => [
         [
+            'key' => 'modules',
+            'type' => 'wire',
+            'method' => 'openStructure',
+            'argument' => 'id',
+            'icon' => 'stack-2',
+            'label' => 'sLMS::global.overview.modules',
+        ],
+        [
             'key' => 'edit',
             'type' => 'wire',
             'method' => 'openEditModal',

@@ -2,6 +2,7 @@
 
 use EvolutionCMS\ServiceProvider;
 use EvoUI\EvoUI;
+use Seiger\sLMS\Components\CatalogueTable;
 use Seiger\sLMS\Components\ModulePanel;
 
 /**
@@ -24,7 +25,7 @@ class sLMSServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the schema and the Evo UI course table in the manager.
+     * Register the schema and the Evo UI catalogue tables in the manager.
      *
      * @since 0.1.0
      */
@@ -37,7 +38,10 @@ class sLMSServiceProvider extends ServiceProvider
             $this->loadViewsFrom($root . '/views', 'sLMS');
             $this->loadTranslationsFrom($root . '/lang', 'sLMS');
             $this->mergeConfigFrom($root . '/config/courses/table.php', 'slms.courses.table');
-            $this->app->make(EvoUI::class)->registerComponent('slms.module-panel', ModulePanel::class);
+            $this->mergeConfigFrom($root . '/config/curriculum/table.php', 'slms');
+            $ui = $this->app->make(EvoUI::class);
+            $ui->registerComponent('slms.module-panel', ModulePanel::class);
+            $ui->registerComponent('slms.catalogue-table', CatalogueTable::class);
         }
     }
 }

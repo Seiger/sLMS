@@ -127,7 +127,7 @@ class CoursesTableData implements ModuleTableProvider
     }
 
     /**
-     * Display the edit action only to managers with the write permission.
+     * Keep navigation available to readers and show editing only to writers.
      *
      * @param list<array<string, mixed>> $actions
      * @return list<array<string, mixed>>
@@ -135,7 +135,9 @@ class CoursesTableData implements ModuleTableProvider
      */
     public function rowActions(array $actions): array
     {
-        return ManagerAccess::allows(write: true) ? $actions : [];
+        return ManagerAccess::allows(write: true)
+            ? $actions
+            : array_values(array_filter($actions, static fn (array $action): bool => $action['key'] === 'modules'));
     }
 
     /**

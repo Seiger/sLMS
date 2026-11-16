@@ -4,6 +4,16 @@
     @elseif($activeTab === 'overview')
         @include('sLMS::overview', ['overview' => $overview])
     @else
-        <x-evo::table.livewire preset="slms.courses" wire-key="slms-courses" />
+        @if($course)
+            <header class="evo-ui-surface__header">
+                <h2>{{ $module ? $course->title . ' / ' . $module->title : $course->title }} · {{ __($module ? 'sLMS::global.overview.lessons' : 'sLMS::global.overview.modules') }}</h2>
+                <x-evo::button icon="arrow-left" :label="__($module ? 'sLMS::global.curriculum.back_to_modules' : 'sLMS::global.curriculum.back_to_courses')" wire:click="backToParent" />
+            </header>
+        @endif
+        @php
+            $preset = $module ? 'slms.lessons' : ($course ? 'slms.modules' : 'slms.courses');
+            $context = $course ? ['parent_id' => $module?->id ?? $course->id, 'module' => $module?->id ?? $course->id] : [];
+        @endphp
+        <livewire:slms.catalogue-table :preset="$preset" :context="$context" :key="$preset . '-' . ($context['parent_id'] ?? 0)" />
     @endif
 </x-evo::module-tab-shell>
