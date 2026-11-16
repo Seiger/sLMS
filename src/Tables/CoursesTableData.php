@@ -71,7 +71,7 @@ class CoursesTableData implements ModuleTableProvider
                 'title' => $course->title,
                 'slug' => $course->slug,
                 'status' => [
-                    'label' => __("sLMS::courses." . ($course->published ? 'published' : 'draft')),
+                    'label' => __("sLMS::global.courses." . ($course->published ? 'published' : 'draft')),
                     'color' => $course->published ? '#16a34a' : null,
                 ],
             ])
@@ -181,21 +181,21 @@ class CoursesTableData implements ModuleTableProvider
             ],
             'modalData.published' => ['required', 'boolean'],
         ], [
-            'modalData.slug.regex' => __('sLMS::courses.slug_help'),
-            'modalData.slug.unique' => __('sLMS::courses.slug_taken'),
-            'modalData.resource_id.exists' => __('sLMS::courses.resource_missing'),
+            'modalData.slug.regex' => __('sLMS::global.courses.slug_help'),
+            'modalData.slug.unique' => __('sLMS::global.courses.slug_taken'),
+            'modalData.resource_id.exists' => __('sLMS::global.courses.resource_missing'),
         ], [
-            'modalData.title' => __('sLMS::courses.title'),
-            'modalData.slug' => __('sLMS::courses.slug'),
-            'modalData.description' => __('sLMS::courses.description'),
-            'modalData.resource_id' => __('sLMS::courses.resource'),
-            'modalData.published' => __('sLMS::courses.published'),
+            'modalData.title' => __('sLMS::global.courses.title'),
+            'modalData.slug' => __('sLMS::global.courses.slug'),
+            'modalData.description' => __('sLMS::global.courses.description'),
+            'modalData.resource_id' => __('sLMS::global.courses.resource'),
+            'modalData.published' => __('sLMS::global.courses.published'),
         ])->validate()['modalData'];
 
         try {
             $course->fill($attributes)->save();
         } catch (UniqueConstraintViolationException) {
-            throw ValidationException::withMessages(['modalData.slug' => __('sLMS::courses.slug_taken')]);
+            throw ValidationException::withMessages(['modalData.slug' => __('sLMS::global.courses.slug_taken')]);
         }
 
         return (int) $course->getKey();

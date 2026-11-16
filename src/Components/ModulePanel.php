@@ -18,7 +18,9 @@ use Seiger\sLMS\Support\ManagerAccess;
  */
 class ModulePanel extends Component
 {
-    public string $activeTab = 'courses';
+    private const DEFAULT_TAB = 'overview';
+
+    public string $activeTab = self::DEFAULT_TAB;
 
     /**
      * Keep the selected tab within the two sections offered by sLMS.
@@ -28,7 +30,7 @@ class ModulePanel extends Component
     public function updatedActiveTab(): void
     {
         if (!in_array($this->activeTab, ['courses', 'overview'], true)) {
-            $this->activeTab = 'courses';
+            $this->activeTab = self::DEFAULT_TAB;
         }
     }
 
@@ -47,8 +49,8 @@ class ModulePanel extends Component
 
         return view('sLMS::livewire.module-panel', [
             'tabs' => [
-                ['key' => 'courses', 'label' => 'sLMS::courses.list', 'icon' => 'book'],
-                ['key' => 'overview', 'label' => 'sLMS::overview.title', 'icon' => 'layout-dashboard'],
+                ['key' => 'overview', 'label' => 'sLMS::global.overview.title', 'icon' => 'layout-dashboard'],
+                ['key' => 'courses', 'label' => 'sLMS::global.courses.list', 'icon' => 'book'],
             ],
             'schemaReady' => $schemaReady,
             'overview' => $schemaReady && $isOverview ? $this->overview() : null,
