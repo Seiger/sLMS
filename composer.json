@@ -1,0 +1,22 @@
+{
+    "name": "seiger/slms",
+    "description": "Learning management package for Evolution CMS.",
+    "type": "evolution-cms-module",
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "php": "^8.4",
+        "evolution-cms/evolution": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Seiger\\sLMS\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Seiger\\sLMS\\sLMSServiceProvider"
+            ]
+        }
+    }
+}
