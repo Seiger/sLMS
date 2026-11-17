@@ -37,6 +37,20 @@ class CatalogueTable extends ModuleTable
     }
 
     /**
+     * Ask the catalogue panel to show the selected module's assessment.
+     *
+     * @since 0.1.0
+     */
+    public function openAssessment(int $id): void
+    {
+        ManagerAccess::authorize();
+
+        if ($this->preset === 'slms.modules') {
+            $this->dispatch('slms-open-module', id: $id, assessment: true)->to(ModulePanel::class);
+        }
+    }
+
+    /**
      * Enable ordering only for managers who can edit course content.
      *
      * @since 0.1.0
@@ -47,7 +61,7 @@ class CatalogueTable extends ModuleTable
     }
 
     /**
-     * Keep edited items in view and show newly appended modules and lessons.
+     * Keep edited items in view and show newly appended curriculum records.
      *
      * @since 0.1.0
      */

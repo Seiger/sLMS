@@ -63,6 +63,14 @@ return [
             'icon' => 'file-text',
             'label' => 'sLMS::global.overview.lessons',
         ],
+        [
+            'key' => 'assessment',
+            'type' => 'wire',
+            'method' => 'openAssessment',
+            'argument' => 'id',
+            'icon' => 'clipboard-check',
+            'label' => 'sLMS::global.assessment.title',
+        ],
     ])],
     'lessons' => ['table' => $table('lesson', 'content', 'sLMS::global.curriculum.content', 'file-text')],
 ];

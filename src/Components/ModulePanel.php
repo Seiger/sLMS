@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Schema;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Seiger\sLMS\Models\Assessment;
+use Seiger\sLMS\Models\AssessmentOption;
+use Seiger\sLMS\Models\AssessmentQuestion;
 use Seiger\sLMS\Models\Course;
 use Seiger\sLMS\Models\Lesson;
 use Seiger\sLMS\Models\Module;
@@ -31,6 +34,9 @@ class ModulePanel extends Component
     #[Locked]
     public ?int $moduleId = null;
 
+    #[Locked]
+    public bool $assessment = false;
+
     /**
      * Keep the selected tab within the two sections offered by sLMS.
      *
@@ -44,6 +50,7 @@ class ModulePanel extends Component
 
         if ($this->activeTab === self::DEFAULT_TAB) {
             $this->courseId = $this->moduleId = null;
+            $this->assessment = false;
         }
     }
 
@@ -64,12 +71,12 @@ class ModulePanel extends Component
     }
 
     /**
-     * Open the lesson list for a module in the current course.
+     * Open lessons or the assessment for a module in the current course.
      *
      * @since 0.1.0
      */
     #[On('slms-open-module')]
-    public function openModule(int $id): void
+    public function openModule(int $id, bool $assessment = false): void
     {
         ManagerAccess::authorize();
         if ($this->activeTab !== 'courses' || $this->courseId === null || $this->moduleId !== null) {
@@ -77,6 +84,7 @@ class ModulePanel extends Component
         }
 
         $this->moduleId = (int) Module::query()->where('course_id', $this->courseId)->findOrFail($id)->getKey();
+        $this->assessment = $assessment;
     }
 
     /**
@@ -90,6 +98,7 @@ class ModulePanel extends Component
 
         if ($this->moduleId !== null) {
             $this->moduleId = null;
+            $this->assessment = false;
         } else {
             $this->courseId = null;
         }
@@ -111,6 +120,10 @@ class ModulePanel extends Component
 
         $course = $schemaReady && $this->courseId !== null ? Course::query()->findOrFail($this->courseId) : null;
         $module = $course !== null && $this->moduleId !== null ? $course->modules()->findOrFail($this->moduleId) : null;
+        $assessmentReady = !$this->assessment || $module === null
+            || (Schema::hasTable((new Assessment())->getTable())
+                && Schema::hasTable((new AssessmentQuestion())->getTable())
+                && Schema::hasTable((new AssessmentOption())->getTable()));
 
         return view('sLMS::livewire.module-panel', [
             'tabs' => [
@@ -121,6 +134,7 @@ class ModulePanel extends Component
             'overview' => $schemaReady && $isOverview ? $this->overview() : null,
             'course' => $course,
             'module' => $module,
+            'assessmentReady' => $assessmentReady,
         ]);
     }
 

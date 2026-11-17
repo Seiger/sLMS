@@ -19,3 +19,11 @@ Dans la ligne d’un cours, sélectionnez **Modules** pour ouvrir son programme.
 Sélectionnez **Créer un module** ou **Créer une leçon**. Pour modifier un élément, utilisez le bouton en forme de crayon dans sa ligne. Le formulaire du module contient un champ de description et celui de la leçon un champ de contenu. Les nouveaux éléments restent à l’état de brouillon tant que vous ne les marquez pas comme publiés.
 
 Les nouveaux éléments sont ajoutés en fin de liste. Déplacez une ligne en la faisant glisser par sa poignée ou utilisez les flèches de la colonne **Ordre**. L’ordre est enregistré immédiatement.
+
+## Test du module
+
+Sélectionnez **Test** dans la ligne du module. Dans la liste des questions, sélectionnez **Créer une question** ou utilisez le bouton en forme de crayon à côté d’une question existante.
+
+Saisissez la question et au moins deux choix de réponse. Cochez **Bonne réponse** pour chaque choix correct. Vous pouvez ajouter, retirer et déplacer les choix dans le formulaire. Enregistrez la question pour appliquer les modifications.
+
+Avec un accès en lecture seule, les gestionnaires voient les questions et le nombre de choix. La modification et la consultation du corrigé nécessitent l’autorisation d’écriture.

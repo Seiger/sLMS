@@ -115,7 +115,7 @@ class CurriculumTableData implements ModuleTableProvider
     }
 
     /**
-     * Keep lesson navigation available even without write access.
+     * Keep lesson and assessment navigation available without write access.
      *
      * @param list<array<string, mixed>> $actions
      * @return list<array<string, mixed>>
@@ -125,7 +125,7 @@ class CurriculumTableData implements ModuleTableProvider
     {
         return ManagerAccess::allows(write: true)
             ? $actions
-            : array_values(array_filter($actions, static fn (array $action): bool => $action['key'] === 'lessons'));
+            : array_values(array_filter($actions, static fn (array $action): bool => in_array($action['key'], ['lessons', 'assessment'], true)));
     }
 
     /**

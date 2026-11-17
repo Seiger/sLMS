@@ -19,3 +19,11 @@ In a course row, select **Modules** to open the course outline. In a module row,
 Select **Create module** or **Create lesson**. To edit a record, use the pencil button in its row. The module form has a description field and the lesson form has a content field. New records are drafts unless you mark them as published.
 
 New records appear at the end of the list. Drag a row by its handle or use the arrows in the **Order** column. The new order is saved immediately.
+
+## Module test
+
+Select **Test** in a learning module’s row. In the list of questions, select **Create question** or use the pencil button next to an existing question.
+
+Enter the question and at least two answer options. Tick **Correct answer** for every correct option. You can add, remove, and move options in the question form. Save the question to apply your changes.
+
+Managers with read-only access can view questions and option counts. The editor and answer key require write access.

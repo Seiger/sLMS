@@ -19,3 +19,11 @@ W wierszu kursu wybierz **Moduły**, aby otworzyć jego program. W wierszu modu�
 Wybierz **Utwórz moduł** lub **Utwórz lekcję**. Aby edytować pozycję, kliknij ikonę ołówka w jej wierszu. Formularz modułu ma pole opisu, a formularz lekcji pole treści. Nowe pozycje są szkicami, dopóki nie oznaczysz ich jako opublikowane.
 
 Nowe pozycje trafiają na koniec listy. Przeciągnij wiersz za uchwyt lub użyj strzałek w kolumnie **Kolejność**. Nowa kolejność jest zapisywana od razu.
+
+## Test modułu
+
+W wierszu modułu wybierz **Test**. Na liście pytań wybierz **Utwórz pytanie** lub kliknij ikonę ołówka przy istniejącym pytaniu.
+
+Wpisz pytanie i dodaj co najmniej dwa warianty odpowiedzi. Zaznacz **Poprawna odpowiedź** przy każdej prawidłowej pozycji. W formularzu możesz dodawać, usuwać i przesuwać warianty. Zapisz pytanie, aby zastosować zmiany.
+
+Użytkownicy z dostępem tylko do odczytu widzą pytania i liczbę wariantów. Edycja i klucz odpowiedzi wymagają uprawnień do zapisu.

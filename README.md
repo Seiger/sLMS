@@ -11,7 +11,7 @@
 
 sLMS is a learning management package for Evolution CMS. It is being developed to manage courses, lessons, enrolments, progress, assessments, and certificates.
 
-In the manager, **Modules → sLMS** opens the course overview. Use the **Courses** tab to manage courses and open their modules. From each module, you can create, edit, and reorder its lessons.
+In the manager, **Modules → sLMS** opens the course overview. Use the **Courses** tab to manage courses and open their modules. Each module has a lesson list and a test with questions and answer options.
 
 ## Installation
 
@@ -25,7 +25,7 @@ Once version 0.1.0 is tagged, use `^0.1` for installations that track tagged rel
 
 Evolution CMS discovers `Seiger\sLMS\sLMSServiceProvider` during package installation.
 
-Run the sLMS schema migrations from the Evolution CMS `core` directory before opening the course manager.
+Run the sLMS schema migration from the Evolution CMS `core` directory before opening the course manager. It creates missing tables and preserves existing data.
 
 ```sh
 php artisan migrate --path=vendor/seiger/slms/database/migrations

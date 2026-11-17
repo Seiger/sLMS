@@ -19,3 +19,11 @@ Wähle in der Kurszeile **Module**, um die Kursstruktur zu öffnen. Wähle in ei
 Wähle **Modul erstellen** oder **Lektion erstellen**. Zum Bearbeiten dient die Schaltfläche mit dem Stift in der jeweiligen Zeile. Das Modulformular enthält eine Beschreibung, das Lektionsformular ein Feld für den Inhalt. Neue Einträge sind Entwürfe, sofern sie nicht als veröffentlicht markiert werden.
 
 Neue Einträge erscheinen am Listenende. Ziehe eine Zeile am Griff oder nutze die Pfeile in der Spalte **Reihenfolge**. Die neue Reihenfolge wird sofort gespeichert.
+
+## Modultest
+
+Wähle in der Zeile des Lernmoduls **Test**. Wähle in der Fragenliste **Frage erstellen** oder die Schaltfläche mit dem Stift neben einer vorhandenen Frage.
+
+Gib die Frage und mindestens zwei Antwortoptionen ein. Markiere jede richtige Option mit **Richtige Antwort**. Im Formular kannst du Optionen hinzufügen, entfernen und verschieben. Speichere die Frage, um die Änderungen zu übernehmen.
+
+Mit Leserechten sind Fragen und die Anzahl der Optionen sichtbar. Der Editor und die richtigen Antworten erfordern Schreibrechte.
