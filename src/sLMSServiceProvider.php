@@ -6,7 +6,7 @@ use Seiger\sLMS\Components\CatalogueTable;
 use Seiger\sLMS\Components\ModulePanel;
 
 /**
- * Registers the sLMS manager module and database migrations with Evolution CMS.
+ * Registers the sLMS manager, learner routes and database schema with Evolution CMS.
  *
  * @since 0.1.0
  */
@@ -25,7 +25,7 @@ class sLMSServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the schema and the Evo UI catalogue tables in the manager.
+     * Load the schema and learner pages and register the Evo UI catalogue tables.
      *
      * @since 0.1.0
      */
@@ -33,10 +33,14 @@ class sLMSServiceProvider extends ServiceProvider
     {
         $root = dirname(__DIR__);
         $this->loadMigrationsFrom($root . '/database/migrations');
+        $this->loadViewsFrom($root . '/views', 'sLMS');
+        $this->loadTranslationsFrom($root . '/lang', 'sLMS');
+
+        if ($this->app->isFrontend() || is_cli()) {
+            $this->loadRoutesFrom($root . '/routes/learner.php');
+        }
 
         if (defined('IN_MANAGER_MODE') && IN_MANAGER_MODE === true) {
-            $this->loadViewsFrom($root . '/views', 'sLMS');
-            $this->loadTranslationsFrom($root . '/lang', 'sLMS');
             $this->mergeConfigFrom($root . '/config/courses/table.php', 'slms.courses.table');
             $this->mergeConfigFrom($root . '/config/curriculum/table.php', 'slms');
             $this->mergeConfigFrom($root . '/config/assessment/table.php', 'slms.assessment.table');

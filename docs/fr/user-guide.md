@@ -27,3 +27,9 @@ Sélectionnez **Test** dans la ligne du module. Dans la liste des questions, sé
 Saisissez la question et au moins deux choix de réponse. Cochez **Bonne réponse** pour chaque choix correct. Vous pouvez ajouter, retirer et déplacer les choix dans le formulaire. Enregistrez la question pour appliquer les modifications.
 
 Avec un accès en lecture seule, les gestionnaires voient les questions et le nombre de choix. La modification et la consultation du corrigé nécessitent l’autorisation d’écriture.
+
+## Passer un test de module
+
+Un utilisateur web Evo ouvre le test d’un module publié à l’adresse `/slms/modules/{module}/test`. Sélectionnez **Commencer ou reprendre le test** pour poursuivre une tentative en cours.
+
+Sélectionnez une ou plusieurs réponses par question. **Enregistrer le brouillon** conserve vos choix. **Soumettre le test** clôt la tentative et affiche le score. Vous pouvez ensuite commencer une nouvelle tentative.

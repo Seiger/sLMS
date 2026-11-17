@@ -27,3 +27,9 @@ Select **Test** in a learning module’s row. In the list of questions, select *
 Enter the question and at least two answer options. Tick **Correct answer** for every correct option. You can add, remove, and move options in the question form. Save the question to apply your changes.
 
 Managers with read-only access can view questions and option counts. The editor and answer key require write access.
+
+## Taking a module test
+
+An Evo web user opens the published module’s test at `/slms/modules/{module}/test`. Select **Start or resume test** to continue an open attempt.
+
+Select one or more options for each question. **Save draft** saves your choices. **Submit test** closes the attempt and shows the score. You can start another attempt once it is complete.

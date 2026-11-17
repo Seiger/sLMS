@@ -27,3 +27,9 @@ W wierszu modułu wybierz **Test**. Na liście pytań wybierz **Utwórz pytanie*
 Wpisz pytanie i dodaj co najmniej dwa warianty odpowiedzi. Zaznacz **Poprawna odpowiedź** przy każdej prawidłowej pozycji. W formularzu możesz dodawać, usuwać i przesuwać warianty. Zapisz pytanie, aby zastosować zmiany.
 
 Użytkownicy z dostępem tylko do odczytu widzą pytania i liczbę wariantów. Edycja i klucz odpowiedzi wymagają uprawnień do zapisu.
+
+## Rozwiązywanie testu modułu
+
+Użytkownik webowy Evo otwiera test opublikowanego modułu pod adresem `/slms/modules/{module}/test`. Wybierz **Rozpocznij lub wznów test**, aby kontynuować otwartą próbę.
+
+Zaznacz jedną lub kilka odpowiedzi na każde pytanie. **Zapisz szkic** zachowuje wybór. **Zakończ test** zamyka próbę i pokazuje wynik. Następnie możesz rozpocząć kolejną próbę.

@@ -13,3 +13,5 @@ Le titre est obligatoire. Le slug est unique parmi les cours et utilise des lett
 Le slug d’un module est unique dans son cours et celui d’une leçon dans son module. Le réordonnancement préserve les identifiants et les liens de parenté.
 
 Chaque module peut avoir un test modifiable `Assessment` (`s_lms_assessments`). Le premier enregistrement d’une question crée le test. Les questions (`AssessmentQuestion`, `s_lms_assessment_questions`) et les choix (`AssessmentOption`, `s_lms_assessment_options`) conservent leur ordre. Chaque choix indique s’il constitue une bonne réponse.
+
+`AssessmentVersion` (`s_lms_assessment_versions`) conserve les questions, les choix, le corrigé et le seuil de réussite. `AssessmentAttempt` (`s_lms_assessment_attempts`) enregistre l’utilisateur web, les réponses, l’heure de soumission et le score. Une question vaut un point si les choix sélectionnés correspondent exactement aux bonnes réponses. Le pourcentage est arrondi à l’entier supérieur. Le seuil par défaut est de 70 %.

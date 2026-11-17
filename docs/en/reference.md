@@ -13,3 +13,5 @@ A course title is required. The slug is unique across courses and uses lowercase
 Module slugs are unique within a course, and lesson slugs are unique within a module. Reordering preserves record IDs and parent relationships.
 
 Each module can have one editable `Assessment` (`s_lms_assessments`). Saving the first question creates the assessment. Questions (`AssessmentQuestion`, `s_lms_assessment_questions`) and options (`AssessmentOption`, `s_lms_assessment_options`) store their order. Correctness is set on each option.
+
+`AssessmentVersion` (`s_lms_assessment_versions`) captures questions, options, the answer key, and the passing threshold. `AssessmentAttempt` (`s_lms_assessment_attempts`) stores the web user, selected answers, submission time, and score. A question earns one point when the selected set exactly matches the correct options. The percentage rounds up. The default passing score is 70%.

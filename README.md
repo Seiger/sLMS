@@ -13,6 +13,8 @@ sLMS is a learning management package for Evolution CMS. It is being developed t
 
 In the manager, **Modules → sLMS** opens the course overview. Use the **Courses** tab to manage courses and open their modules. Each module has a lesson list and a test with questions and answer options.
 
+Signed-in learners can take tests in published modules, save a draft, and submit it for scoring.
+
 ## Installation
 
 After the package is available on Packagist, run the following command from the Evolution CMS `core` directory. Use `dev-main` while the package is on its development branch.

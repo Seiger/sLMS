@@ -5,12 +5,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Defines the sLMS catalogue and assessment schema.
+ * Defines the sLMS catalogue, editable assessments and learner attempts.
  *
  * @since 0.1.0
  */
 return new class extends Migration
 {
+    private const PREVIOUS_SCHEMA = '2026_11_17_000001_create_s_lms_schema';
+
     private const PREVIOUS_MIGRATIONS = [
         's_lms_courses' => '2026_11_16_000001_create_s_lms_courses_table',
         's_lms_modules' => '2026_11_16_000002_create_s_lms_modules_table',
@@ -43,12 +45,14 @@ return new class extends Migration
     {
         $repository = app('migration.repository');
         $previous = $repository->repositoryExists() ? $repository->getRan() : [];
+        $hasPreviousSchema = in_array(self::PREVIOUS_SCHEMA, $previous, true);
 
         foreach (array_reverse(array_keys($this->tables())) as $table) {
             $legacyMigration = self::PREVIOUS_MIGRATIONS[$table] ?? null;
-            if (!in_array($legacyMigration, $previous, true)) {
-                Schema::dropIfExists($table);
+            if ($legacyMigration !== null && ($hasPreviousSchema || in_array($legacyMigration, $previous, true))) {
+                continue;
             }
+            Schema::dropIfExists($table);
         }
     }
 
@@ -123,6 +127,30 @@ return new class extends Migration
                 $table->boolean('is_correct')->default(false);
                 $table->unsignedInteger('position');
                 $table->index(['question_id', 'position', 'id']);
+                $table->timestamps();
+            },
+            's_lms_assessment_versions' => static function (Blueprint $table): void {
+                $table->engine = 'InnoDB';
+                $table->id();
+                $table->foreignId('assessment_id')->constrained('s_lms_assessments')->restrictOnDelete();
+                $table->char('fingerprint', 64);
+                $table->json('definition');
+                $table->unsignedTinyInteger('pass_percent');
+                $table->unique(['assessment_id', 'fingerprint'], 'slms_assessment_version_hash_unique');
+                $table->timestamps();
+            },
+            's_lms_assessment_attempts' => static function (Blueprint $table): void {
+                $table->engine = 'InnoDB';
+                $table->id();
+                $table->foreignId('version_id')->constrained('s_lms_assessment_versions')->restrictOnDelete();
+                $table->unsignedBigInteger('web_user_id');
+                $table->json('answers');
+                $table->unsignedInteger('total_questions');
+                $table->unsignedInteger('score')->nullable();
+                $table->unsignedTinyInteger('score_percent')->nullable();
+                $table->boolean('is_successful')->nullable();
+                $table->timestamp('submitted_at')->nullable();
+                $table->index(['web_user_id', 'submitted_at', 'id'], 'slms_attempt_user_submission_index');
                 $table->timestamps();
             },
         ];

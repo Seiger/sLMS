@@ -27,3 +27,9 @@ Wähle in der Zeile des Lernmoduls **Test**. Wähle in der Fragenliste **Frage e
 Gib die Frage und mindestens zwei Antwortoptionen ein. Markiere jede richtige Option mit **Richtige Antwort**. Im Formular kannst du Optionen hinzufügen, entfernen und verschieben. Speichere die Frage, um die Änderungen zu übernehmen.
 
 Mit Leserechten sind Fragen und die Anzahl der Optionen sichtbar. Der Editor und die richtigen Antworten erfordern Schreibrechte.
+
+## Einen Modultest absolvieren
+
+Ein Evo-Webnutzer öffnet den Test des veröffentlichten Moduls unter `/slms/modules/{module}/test`. Wählen Sie **Test beginnen oder fortsetzen**, um einen offenen Versuch fortzusetzen.
+
+Wählen Sie pro Frage eine oder mehrere Optionen. **Entwurf speichern** speichert Ihre Auswahl. **Test abgeben** schließt den Versuch ab und zeigt das Ergebnis. Danach können Sie einen neuen Versuch beginnen.

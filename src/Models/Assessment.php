@@ -36,4 +36,15 @@ class Assessment extends Model
     {
         return $this->hasMany(AssessmentQuestion::class)->orderBy('position')->orderBy('id');
     }
+
+    /**
+     * Get the snapshots created for learner attempts.
+     *
+     * @return HasMany<AssessmentVersion, $this>
+     * @since 0.1.0
+     */
+    public function versions(): HasMany
+    {
+        return $this->hasMany(AssessmentVersion::class);
+    }
 }

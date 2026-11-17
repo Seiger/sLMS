@@ -13,3 +13,5 @@ Der Titel ist erforderlich. Der Slug ist im gesamten Katalog eindeutig und verwe
 Modul-Slugs sind innerhalb eines Kurses eindeutig, Lektions-Slugs innerhalb eines Moduls. Beim Umsortieren bleiben IDs und Zuordnungen erhalten.
 
 Jedes Modul kann einen bearbeitbaren Test `Assessment` (`s_lms_assessments`) haben. Der Test wird beim Speichern der ersten Frage angelegt. Fragen (`AssessmentQuestion`, `s_lms_assessment_questions`) und Antwortoptionen (`AssessmentOption`, `s_lms_assessment_options`) speichern ihre Reihenfolge. Jede Option hat eine Kennzeichnung für die richtige Antwort.
+
+`AssessmentVersion` (`s_lms_assessment_versions`) speichert Fragen, Optionen, Lösungsschlüssel und Bestehensgrenze. `AssessmentAttempt` (`s_lms_assessment_attempts`) enthält den Webnutzer, die gewählten Antworten, die Abgabezeit und das Ergebnis. Für eine Frage gibt es einen Punkt, wenn die Auswahl genau den richtigen Optionen entspricht. Der Prozentwert wird aufgerundet. Standardmäßig liegt die Bestehensgrenze bei 70%.
