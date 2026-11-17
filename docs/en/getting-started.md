@@ -15,4 +15,4 @@ php artisan migrate --path=vendor/seiger/slms/database/migrations
 
 When updating an existing installation, run the migration command again. It creates any missing sLMS tables and preserves existing data.
 
-Open **Modules → sLMS** in the manager. To add a course, select **Courses**.
+Open **Modules → Courses** in the manager. To add a course, select **Courses**.

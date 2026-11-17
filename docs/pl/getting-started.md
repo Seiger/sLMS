@@ -15,4 +15,4 @@ php artisan migrate --path=vendor/seiger/slms/database/migrations
 
 Podczas aktualizacji istniejącej instalacji uruchom ponownie polecenie migracji. Doda ono brakujące tabele sLMS i zachowa istniejące dane.
 
-W panelu administracyjnym otwórz **Moduły → sLMS**. Aby dodać kurs, wybierz **Kursy**.
+W panelu administracyjnym otwórz **Moduły → Kursy**. Aby dodać kurs, wybierz **Kursy**.

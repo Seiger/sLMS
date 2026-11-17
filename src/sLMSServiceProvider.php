@@ -25,7 +25,7 @@ class sLMSServiceProvider extends ServiceProvider
     }
 
     /**
-     * Load the schema and learner pages and register the Evo UI catalogue tables.
+     * Load the schema and learner pages and register the manager interface.
      *
      * @since 0.1.0
      */
@@ -47,6 +47,37 @@ class sLMSServiceProvider extends ServiceProvider
             $ui = $this->app->make(EvoUI::class);
             $ui->registerComponent('slms.module-panel', ModulePanel::class);
             $ui->registerComponent('slms.catalogue-table', CatalogueTable::class);
+
+            $this->registerManagerMenuLabel();
         }
+    }
+
+    /**
+     * Supply the translated label while the native manager builds its module menu.
+     *
+     * Both menu renderers use the rows built from the file module registry. Restore
+     * the registered name once those rows exist so module execution keeps its name.
+     *
+     * @since 0.1.0
+     */
+    private function registerManagerMenuLabel(): void
+    {
+        $core = $this->app;
+        $moduleId = md5('sLMS');
+        $originalName = null;
+
+        $core['events']->listen('evolution.OnManagerPreFrameLoader', static function () use ($core, $moduleId, &$originalName): void {
+            if (isset($core->modulesFromFile[$moduleId]['name'])) {
+                $originalName ??= $core->modulesFromFile[$moduleId]['name'];
+                $core->modulesFromFile[$moduleId]['name'] = e(__('sLMS::global.courses.list'));
+            }
+        });
+
+        $core['events']->listen('evolution.OnManagerMenuPrerender', static function () use ($core, $moduleId, &$originalName): void {
+            if ($originalName !== null && isset($core->modulesFromFile[$moduleId])) {
+                $core->modulesFromFile[$moduleId]['name'] = $originalName;
+            }
+            $originalName = null;
+        });
     }
 }
